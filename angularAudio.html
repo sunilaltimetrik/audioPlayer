@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<script>
+//Play Standart
+function play() {
+    var audio = document.getElementById("audio1");
+    audio.play();
+};
+
+//Play Ng
+function playNg() {
+    var audio = document.getElementById("audio1ng-0");
+    audio.play();
+};
+
+//Play NG2
+function playNg2() {
+    var audio = document.getElementById("audioNg2");
+    audio.play();
+};
+
+/************/
+
+var soundApp = angular.module('soundApp',[]);
+function TstController($scope){
+    $scope.audioFiles =[
+        {url: 'button-1.mp3'},
+        {url: 'button-2.mp3'}
+    ];
+};
+
+//
+
+
+
+
+</script>
+
+<body>
+<!--<audio id="audio1">
+	<source src="http://www.schillmania.com/projects/soundmanager2/demo/mpc/audio/CHINA_1.mp3"></source>
+	Your browser isn't invited for super fun audio time.
+</audio>
+<button onclick="play();">Play Standart</button>
+<br>
+=====
+-->
+<div ng-app="soundApp">
+    <div ng-controller="TstController">
+        
+        <div ng-repeat="audio in audioFiles">
+          <audio id="audio1ng-{{$index}}">
+	        <source src="{{audio.url}}"></source>
+	      </audio>
+        </div>
+        <button onclick="playNg();">Play Ng</button>
+        <br>
+        ====
+        <br>
+            
+        <select ng-model="selectedAudioFile" class="audio-dropdown">
+		    <option ng-repeat="audioFile in audioFiles" value="{{audioFile.url}}">{{ audioFile.url}}</option>
+		</select>
+           
+         <audio id="audioNg2">
+	        <source src="{{selectedAudioFile}}"></source>
+	     </audio>
+
+         <button ng-click="playNg2()">Play NG2</button>
+            
+            
+    
+	</div>
+</div>
+</body>
+</html>
